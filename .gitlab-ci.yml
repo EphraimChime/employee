@@ -1,0 +1,16 @@
+variables:
+  IMAGE_TAG: employee_app
+  
+
+build:
+  stage: build
+  before_script:
+    - docker login -u $username -p $password 
+  script: 
+    - docker build -t $IMAGE_TAG .
+    - docker images
+    - docker push $IMAGE_TAG
+    - docker push ephraimchime/$IMAGE_TAG:latest
+  tags:
+    - "localrunner"
+  
